@@ -16,6 +16,8 @@ public interface DaoEmploye {
 	
 	Employe findById(long code);  // Long ira aussi
 	List<Employe> findAll();
+	List<Employe> findEmployeWithNameBeginBy(String debut);
+	
 	
 	// ...
 	

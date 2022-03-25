@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name="Employe.findEmployeWithNameBeginBy",
+query="SELECT e FROM Employe e WHERE e.lastname LIKE :debut")
 // @Getter @Setter // technologie lumbok
 public class Employe {
 	

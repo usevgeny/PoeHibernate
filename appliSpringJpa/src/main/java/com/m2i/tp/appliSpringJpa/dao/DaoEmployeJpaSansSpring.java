@@ -76,4 +76,10 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye{
 		
 	}
 
+	@Override
+	public List<Employe> findEmployeWithNameBeginBy(String debut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

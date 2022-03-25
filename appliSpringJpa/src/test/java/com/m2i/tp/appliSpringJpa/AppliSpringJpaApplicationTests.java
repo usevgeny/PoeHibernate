@@ -69,10 +69,21 @@ class AppliSpringJpaApplicationTests {
 		if (nouveauEmployeRelu3==null) {
 		System.out.println("nouveauEmployeRelu3 n'existe pas");}
 		
+		// TP  on verifie la recherche par debut du nom 
 		
-	}
+		System.out.println("TEST TP");
+		List<Employe> employes1 = daoEmploye.findEmployeWithNameBeginBy("A");
+		
+		for(Employe e: employes1) {
+			System.out.println("Found: "+e);
+		}
+		
+		
+		
+		
+		
 }
-
+}
 	
 
 
