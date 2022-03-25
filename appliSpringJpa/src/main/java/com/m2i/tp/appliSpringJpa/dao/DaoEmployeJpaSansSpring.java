@@ -37,26 +37,46 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye{
 
 	@Override
 	public Employe insertNew(Employe emp) {
-		// TODO Auto-generated method stub
 		
-		// en entrée , emp est un nouvel objet Employe avec la cléf primaire .empId à null(encore inconnu)
 		
-		// déclenche automatiquement INSERT_INTO employe(firstname, ...) VALUES(emp.getFirstName()....)
-		entityManager.persist(emp); //.empId n'est normalement plus nul si auto-incrementation
+		//
+		
+		try {
+			entityManager.getTransaction().begin();
+			
+					
+			// en entrée , emp est un nouvel objet Employe avec la cléf primaire .empId à null(encore inconnu)
+			// déclenche automatiquement INSERT_INTO employe(firstname, ...) VALUES(emp.getFirstName()....)
+			entityManager.persist(emp); //.empId n'est normalement plus nul si auto-incrementation
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.entityManager.getTransaction().rollback();
+		      e.printStackTrace();
+		      throw new RuntimeException("echec insert new employee");
+		}
 		return emp; // retourne l'objet modifié(avec .empId non null)
 	}
 
 	@Override
 	public Employe update(Employe emp) {
-		return entityManager.merge(emp); 
+		
+		entityManager.getTransaction().begin();
+		 
+		entityManager.merge(emp); 
+		entityManager.getTransaction().commit();
+		return emp ;
+		
 		
 	}
 
 	@Override
 	public void deleteById(long code) {
+		
+		entityManager.getTransaction().begin();
 		Employe empAsupprimer = entityManager.find(Employe.class, code);
 		entityManager.remove(empAsupprimer);
-		
+		entityManager.getTransaction().commit();
 		
 	}
 

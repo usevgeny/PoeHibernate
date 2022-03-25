@@ -21,6 +21,11 @@ public class TestSansSpringApp {
 		DaoEmployeJpaSansSpring daoEmployeJpa = new DaoEmployeJpaSansSpring();
 		daoEmployeJpa.setEntityManager(entityManager);
 		
+		
+		Employe nouveauEmploye = new Employe(null, "aurelie", "leboucher", "012345678925", "aurelie@test.com", "login", "pass");
+		
+		daoEmployeJpa.insertNew(nouveauEmploye);
+		
 		List<Employe> employes = daoEmployeJpa.findAll();
 		for(Employe emp : employes) {
 			System.out.println(emp);
