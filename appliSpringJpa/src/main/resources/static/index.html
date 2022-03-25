@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HIBERNATE</title>
+</head>
+<body>
+<p>HelloWorld</p>
+<a href="api-gestionProjet/employe">Liste des employés en json</a>
+
+<br>
+<p>
+
+@RestController // composatn string de type Web Service Res (cas particulier de @ Composant) 
+@RequestMapping(path="/api-gestionProjet/employe",
+				headers = "Accept=application/json"
+		)
+</p>
+</body>
+</html>
