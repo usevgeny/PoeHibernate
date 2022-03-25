@@ -38,13 +38,9 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye{
 	@Override
 	public Employe insertNew(Employe emp) {
 		
-		
-		//
-		
 		try {
 			entityManager.getTransaction().begin();
-			
-					
+								
 			// en entrée , emp est un nouvel objet Employe avec la cléf primaire .empId à null(encore inconnu)
 			// déclenche automatiquement INSERT_INTO employe(firstname, ...) VALUES(emp.getFirstName()....)
 			entityManager.persist(emp); //.empId n'est normalement plus nul si auto-incrementation
