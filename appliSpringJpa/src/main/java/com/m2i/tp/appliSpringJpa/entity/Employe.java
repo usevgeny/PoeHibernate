@@ -94,6 +94,11 @@ public class Employe {
 		this.login = login;
 		this.password = password;
 	}
+	@Override
+	public String toString() {
+		return "Employe [empId=" + empId + ", firstname=" + firstname + ", lastname=" + lastname + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", login=" + login + ", password=" + password + "]";
+	}
 	
 
 	
