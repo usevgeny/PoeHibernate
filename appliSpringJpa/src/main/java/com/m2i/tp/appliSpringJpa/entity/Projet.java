@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+//@Entity
 public class Projet {
 
 	@Id // pour dire que EMP_ID est la cléf promaire(primary key)
