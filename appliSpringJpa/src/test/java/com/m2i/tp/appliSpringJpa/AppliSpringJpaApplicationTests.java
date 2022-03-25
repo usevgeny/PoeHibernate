@@ -29,16 +29,45 @@ class AppliSpringJpaApplicationTests {
 	
 	@Test // appelé automatiquement après la prise en compte de @Autowired
  	public void testAvecSpring() {
+		// sequence de test idéale:
+		
+		// 1. créer une nouvelle chose
+		Employe nouveauEmploye = new Employe(null, "aurelie", "leboucher", "012345678925", "aurelie@test.com", "login", "pass");
 		
 		
-		//Employe nouveauEmploye = new Employe(null, "aurelie", "leboucher", "012345678925", "aurelie@test.com", "login", "pass");
+		daoEmploye.insertNew(nouveauEmploye);
 		
-		//daoEmploye.insertNew(nouveauEmploye);
+		Long idEmp = nouveauEmploye.getEmpId();
 		
+		//		2. afficher tout pour verifier l'ajot
 		List<Employe> employes = daoEmploye.findAll();
 		for(Employe emp : employes) {
 			System.out.println(emp);
 		}
+		
+		
+		// 3.recuperer une entité précise via sa clef primaire et l'afficher 
+		
+		Employe nouveauEmployeRelu = daoEmploye.findById(idEmp);
+		System.out.println("nouveauEmployeRelu "+ nouveauEmployeRelu);
+		
+		
+		// 4. modifier les valeurs en mémoire et puis en base
+		nouveauEmployeRelu.setPhoneNumber("456453168435415");
+		daoEmploye.update(nouveauEmployeRelu);
+		
+		// 5.  redeclencher étape 3 pour vérifier que la mise à jour a bien été fait (à bien été ajouté n base
+		
+		Employe nouveauEmployeRelu2 = daoEmploye.findById(idEmp);
+		System.out.println("nouveauEmployeRelu2 "+ nouveauEmployeRelu2);
+		// 6. supprimer la chose ajoutée à l'étape 1
+		daoEmploye.deleteById(idEmp);
+		// 7. on vérifie si cela n'existe plus
+		
+		Employe nouveauEmployeRelu3 = daoEmploye.findById(idEmp);
+		
+		if (nouveauEmployeRelu3==null) {
+		System.out.println("nouveauEmployeRelu3 n'existe pas");}
 		
 		
 	}
