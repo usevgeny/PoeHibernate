@@ -12,16 +12,10 @@ import com.m2i.tp.appliSpringJpa.entity.Phase;
  * héritant de RunTimeExceptio(ex:JPSException) trycach facultatif, car ils ont déjà un trycach
  * 
  */
-public interface DaoPhase {
+public interface DaoPhase extends Dao<Phase>{
+	//...
 	
-	Phase findById(long code);  // Long ira aussi
-	List<Phase> findAll();
-	
-	
-	// Phase save(Phase emp); // dans SpringData au sense SaveOrUpdate
-	Phase insertNew(Phase ph); // en retoru objet sauvegardé avec le clé primaire connue(auto-incrementé)
-	Phase update(Phase pf);
-	void deleteById(long code); // throws;
+	List<Phase>findPhaseByProject(Long codeProjet);
 	
 
 }

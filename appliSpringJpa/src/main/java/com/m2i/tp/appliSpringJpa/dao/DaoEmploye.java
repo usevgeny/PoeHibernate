@@ -12,19 +12,13 @@ import com.m2i.tp.appliSpringJpa.entity.Employe;
  * héritant de RunTimeExceptio(ex:JPSException) trycach facultatif, car ils ont déjà un trycach
  * 
  */
-public interface DaoEmploye {
+public interface DaoEmploye extends Dao<Employe>{
 	
-	Employe findById(long code);  // Long ira aussi
-	List<Employe> findAll();
+
 	List<Employe> findEmployeWithNameBeginBy(String debut);
+	//.. autres futures methodes
 	
 	
-	// ...
-	
-	// Employe save(Employe emp); // dans SpringData au sense SaveOrUpdate
-	Employe insertNew(Employe emp); // en retoru objet sauvegardé avec le clé primaire connue(auto-incrementé)
-	Employe update(Employe emp);
-	void deleteById(long code); // throws;
 	
 
 }
