@@ -3,8 +3,10 @@ package com.m2i.tp.appliSpringJpa.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,8 +39,15 @@ public class Projet {
 	
 	
 	// 28/03/2022 la relation inverse visaivse de @ManyToOne et c'est facultatif
-	@OneToMany(mappedBy = "projet" )
+	@OneToMany(mappedBy = "projet", fetch = FetchType.LAZY , 
+				cascade = CascadeType.REMOVE) // valeur mapped by = nom java de la relation inverse
+				// CascadeType.REMOVE (cascade-delete ici car composition dans diagramme UML)
+	// si on supprime un projet, les phases du projet vont toutes ete suppromés 
+	
 	private List<Phase> phases;
+	
+	// @OneToMany(mappedBy = "projet", fetch = FetchType.EAGER ) : la mauvaise solution  metttre dans les paramettre de @OneToMany fetch=Fetch.type c'est une mauvaise pratique car cela impacte la performance
+	
 	
 	
 	// ...
@@ -48,6 +57,12 @@ public class Projet {
 	
 	
 	
+	public List<Phase> getPhases() {
+		return phases;
+	}
+	public void setPhases(List<Phase> phases) {
+		this.phases = phases;
+	}
 	public Long getCode() {
 		return code;
 	}

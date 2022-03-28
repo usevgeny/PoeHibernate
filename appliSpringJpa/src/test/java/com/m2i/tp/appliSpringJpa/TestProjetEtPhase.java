@@ -68,7 +68,16 @@ class TestProjetEtPhase {
 			System.out.println(p);
 		}
 		
-		//...
+		
+		Projet projectBrelu = daoProjet.findProjectWithPhases(projetB.getCode());
+		System.out.println("projetBrelu"+projectBrelu.toString());
+		// attention les phases lie au projet  via @OneToMany ne sont pas tjrs rementés en memoire(en mode Lazy) et donc on a potentiel erreur  LazyInitialisation exception
+				for(Phase p: projectBrelu.getPhases()) {
+					
+					System.out.println(p);
+				}
+				//...
+		daoProjet.deleteById(projetB.getCode() );// avec suppression des phases en cascade;
 		
 	}
 	

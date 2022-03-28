@@ -14,4 +14,6 @@ import com.m2i.tp.appliSpringJpa.entity.Projet;
  */
 public interface DaoProjet extends Dao<Projet> {
 	//..
+	
+	Projet findProjectWithPhases(Long codeProjet);
 }

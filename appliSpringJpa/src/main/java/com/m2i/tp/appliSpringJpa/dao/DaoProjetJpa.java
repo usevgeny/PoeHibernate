@@ -40,6 +40,17 @@ public class DaoProjetJpa extends DaoJpa<Projet> implements DaoProjet{
 
 
 
+	@Override
+	public Projet findProjectWithPhases(Long codeProjet) {
+		return entityManager.createQuery("SELECT p FROM Projet p INNER JOIN FETCH p.phases WHERE p.code = :codeP", Projet.class)
+				.setParameter("codeP", codeProjet)
+	            .getSingleResult();
+		
+		
+	};
+
+
+
 
 	
 	
