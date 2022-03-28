@@ -39,12 +39,13 @@ public class DaoPhaseJpa extends DaoJpa<Phase> implements DaoPhase{
 	}
 
 
+
 	@Override
-	public List<Phase> findPhaseByProject(Long codeProjet) {
-		return (List<Phase>) entityManager.createQuery("SELECT p FROM Phase WHERE p.projet.code = :codeP",Phase.class)
-				.setParameter("CodeP", codeProjet);
-		
-
+	public List<Phase> findPhasesByProject(Long codeProjet) {
+		return entityManager.createQuery("SELECT p FROM Phase p WHERE p.projet.code = :codeP",Phase.class)
+	            .setParameter("codeP", codeProjet)
+	            .getResultList();
+	}
 
 }
-}
+
