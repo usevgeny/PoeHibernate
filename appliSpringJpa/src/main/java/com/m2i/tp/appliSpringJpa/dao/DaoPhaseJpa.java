@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component; //pour prise ne charge par le framework Spring , pourque la classe soit vue comme un component spring
 import org.springframework.transaction.annotation.Transactional;
 
+import com.m2i.tp.appliSpringJpa.entity.Employe;
 import com.m2i.tp.appliSpringJpa.entity.Phase;
 
 @Component // ou @Repository
@@ -45,6 +46,16 @@ public class DaoPhaseJpa extends DaoJpa<Phase> implements DaoPhase{
 		return entityManager.createQuery("SELECT p FROM Phase p WHERE p.projet.code = :codeP",Phase.class)
 	            .setParameter("codeP", codeProjet)
 	            .getResultList();
+	}
+
+
+	@Override
+	public List<Employe> findEmployeOfPhase(Long code_phase) {
+		// TODO Auto-generated method stub
+		return entityManager.createNamedQuery("Phase.findEmployeOfPhase", Employe.class)
+				.setParameter("codePhase", code_phase)
+				.getResultList();
+				
 	}
 
 }

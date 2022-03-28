@@ -1,18 +1,33 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+
+// NB: la requette exprime ici est du JPQL (JPA query language) et pas du SQL ordinaire, 
+//pas besoin d'indiuer ON ... =  ... car le lien esr deja exprimé près de  @ManyToMany
+
+@NamedQuery(name = "Phase.findEmployeOfPhase", 
+			query = "SELECT e from Phase p JOIN p.employes e WHERE p.code = :codePhase")
+
+// JOIN p.employees e est à lire comme e est un alias sur une instance d'un memebre 
+// de la collection des employes reliés (par jointure) à la phase p   /// page pp de JPA_HIBERNATE 
 public class Phase {
 
 	
@@ -48,6 +63,19 @@ public class Phase {
 	@ManyToOne()
 	@JoinColumn(name="code_projet")
 	private Projet projet;
+	
+	@ManyToMany( fetch = FetchType.LAZY)
+	@JoinTable(name = "Phase_Employe",
+	           joinColumns = {@JoinColumn(name = "code_phase")},
+	           inverseJoinColumns = {@JoinColumn(name = "emp_id")})
+	private List<Employe> employes;
+	
+	public void addEmploye(Employe e) {
+		if(employes==null) {
+			employes = new ArrayList<>();
+		}
+		employes.add(e);
+	}
 	
 	
 	public Long getCode() {
@@ -92,12 +120,20 @@ public class Phase {
 	public void setProportionProjet(Double proportionProjet) {
 		this.proportionProjet = proportionProjet;
 	}
+	
+	
+	
+	
+	@ManyToOne()
 	public Projet getProjet() {
 		return projet;
 	}
 	public void setProjet(Projet projet) {
 		this.projet = projet;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Phase [code=" + code + ", label=" + label + ", description=" + description + ", dateDebut=" + dateDebut

@@ -42,7 +42,7 @@ public class Projet {
 	@OneToMany(mappedBy = "projet", fetch = FetchType.LAZY , 
 				cascade = CascadeType.REMOVE) // valeur mapped by = nom java de la relation inverse
 				// CascadeType.REMOVE (cascade-delete ici car composition dans diagramme UML)
-	// si on supprime un projet, les phases du projet vont toutes ete suppromés 
+	// si on supprime un projet, les phases du projet vont toutes ete suppromés O
 	
 	private List<Phase> phases;
 	
