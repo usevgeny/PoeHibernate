@@ -1,5 +1,10 @@
 package com.m2i.tp.appliSpringJpa.entity;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity // entité persistance
+//@DiscriminatorValue("ChefProjet") // en fait la valeur par defaut c'est le nom de la classe; donc meme pas besoin de le preciser si c'est le meme 
 public class ChefProjet extends Employe{
 	
 	private String methodologie; // exemple "XP;SCRUM;MERISE" ou "SCRUM"  

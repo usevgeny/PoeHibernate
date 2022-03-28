@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.m2i.tp.appliSpringJpa.dao.DaoEmploye;
 import com.m2i.tp.appliSpringJpa.dao.DaoPhase;
 import com.m2i.tp.appliSpringJpa.dao.DaoProjet;
+import com.m2i.tp.appliSpringJpa.entity.ChefProjet;
 import com.m2i.tp.appliSpringJpa.entity.Employe;
 import com.m2i.tp.appliSpringJpa.entity.Phase;
 import com.m2i.tp.appliSpringJpa.entity.Projet;
@@ -87,9 +88,25 @@ class TestProjetEtPhase {
 		
 		
 		Employe emp1 = new Employe(null, "aurelie", "leboucher", "012345678925", "aurelie@test.com", "login", "pass");
-		Employe emp2 = new Employe(null, "Pacal", "Miette", "78056348", "Pascal@test.com", "login", "pass");
 		daoEmploye.insertNew(emp1);
+		
+		Employe emp2 = new Employe(null, "Pacal", "Miette", "78056348", "Pascal@test.com", "login", "pass");
 		daoEmploye.insertNew(emp2);
+		
+		
+		ChefProjet cp1 = new ChefProjet(null, "Franck", "LeBlanc", "8849655", "plm@test.com", "login", "pass");
+		cp1.setMethodologie("SCRUM");
+		daoEmploye.insertNew(cp1);
+		
+		
+		Employe cp1ReluEnTantQueEmploye = daoEmploye.findById(cp1.getEmpId());
+		if(cp1ReluEnTantQueEmploye instanceof ChefProjet) {
+			ChefProjet cp1Relu = (ChefProjet) cp1ReluEnTantQueEmploye;
+			System.out.println( "Chef de projet relu  "+cp1Relu);
+			System.out.println( "Methodologie:  "+cp1Relu.getMethodologie());
+		};
+		
+		
 		
 		phase_a1.addEmploye(emp1);
 		phase_a1.addEmploye(emp2);
@@ -99,6 +116,11 @@ class TestProjetEtPhase {
 		
 		List<Employe> employesPhase_a1 = daoPhase.findEmployeOfPhase(phase_a1.getCode());
 		System.out.println(employesPhase_a1);
+		
+		
+		
+		
+		
 	}
 	
 
