@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -38,7 +40,16 @@ public class Phase {
 	private Double proportionProjet; // exemple 0.5 pour 50%
 	//private Double montant;
 	// à faire en tp les annotations de la page 31
-	private Projet projet ;
+	
+	
+	
+	
+	
+	@ManyToOne()
+	@JoinColumn(name="code_projet")
+	private Projet projet;
+	
+	
 	public Long getCode() {
 		return code;
 	}
