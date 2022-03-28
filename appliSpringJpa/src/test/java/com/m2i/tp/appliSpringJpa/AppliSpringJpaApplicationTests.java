@@ -3,6 +3,7 @@ package com.m2i.tp.appliSpringJpa;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.nio.channels.UnresolvedAddressException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.m2i.tp.appliSpringJpa.dao.DaoEmploye;
+import com.m2i.tp.appliSpringJpa.entity.Adresse;
 import com.m2i.tp.appliSpringJpa.entity.Employe;
 
 @SpringBootTest
@@ -33,9 +35,11 @@ class AppliSpringJpaApplicationTests {
 		
 		// 1. créer une nouvelle chose
 		Employe nouveauEmploye = new Employe(null, "aurelie", "leboucher", "012345678925", "aurelie@test.com", "login", "pass");
+		Adresse adr1 = new Adresse(null, "12 rue Elle", "75001", "ParIci");
 		
-		
+		nouveauEmploye.setAdressePrincipale(adr1);
 		daoEmploye.insertNew(nouveauEmploye);
+		
 		
 		Long idEmp = nouveauEmploye.getEmpId();
 		
@@ -51,6 +55,8 @@ class AppliSpringJpaApplicationTests {
 		Employe nouveauEmployeRelu = daoEmploye.findById(idEmp);
 		System.out.println("nouveauEmployeRelu "+ nouveauEmployeRelu);
 		
+		System.out.println("Avec adresse "+ nouveauEmployeRelu.getAdressePrincipale());
+		
 		
 		// 4. modifier les valeurs en mémoire et puis en base
 		nouveauEmployeRelu.setPhoneNumber("456453168435415");
@@ -61,7 +67,7 @@ class AppliSpringJpaApplicationTests {
 		Employe nouveauEmployeRelu2 = daoEmploye.findById(idEmp);
 		System.out.println("nouveauEmployeRelu2 "+ nouveauEmployeRelu2);
 		// 6. supprimer la chose ajoutée à l'étape 1
-		daoEmploye.deleteById(idEmp);
+	//	daoEmploye.deleteById(idEmp);
 		// 7. on vérifie si cela n'existe plus
 		
 		Employe nouveauEmployeRelu3 = daoEmploye.findById(idEmp);
